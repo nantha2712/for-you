@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>For You — Take a Breath</title>
+
   <style>
     :root{
       --bg1:#ffe8f3;
@@ -17,49 +18,50 @@
     body{
       margin:0;
       font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: radial-gradient(1200px 600px at 10% 10%, var(--bg1), transparent),
-                  radial-gradient(1000px 500px at 95% 90%, var(--bg2), transparent),
+      background: radial-gradient(1000px 500px at 10% 10%, var(--bg1), transparent),
+                  radial-gradient(800px 400px at 95% 90%, var(--bg2), transparent),
                   linear-gradient(180deg,#fff 0%, #fafafa 100%);
       display:flex;
       align-items:center;
       justify-content:center;
-      padding:24px;
+      padding:12px;
       color:var(--muted);
     }
 
+    /* CARD */
     .card{
       width:100%;
-      max-width:900px;
-      border-radius:20px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.8));
-      box-shadow: 0 10px 30px rgba(20,30,40,0.08);
-      padding:28px;
-      display:grid;
-      grid-template-columns: 1fr 380px;
+      max-width:600px;
+      border-radius:22px;
+      background: rgba(255,255,255,0.92);
+      box-shadow: 0 8px 25px rgba(20,30,40,0.08);
+      padding:22px;
+      display:flex;
+      flex-direction:column;
       gap:20px;
-      align-items:center;
-      overflow:hidden;
     }
 
-    .left{
-      padding:10px 8px;
-    }
     h1{
       margin:0 0 8px 0;
-      font-size:28px;
+      font-size:24px;
       color:#2b2b2b;
+      line-height:1.3;
+      text-align:center;
     }
     p.lead{
-      margin:0 0 16px 0;
+      margin:0 0 14px 0;
       line-height:1.5;
+      text-align:center;
+      font-size:15px;
     }
 
+    /* MESSAGE BOX */
     .messages{
       background:var(--card-bg);
       border-radius:12px;
-      padding:12px;
-      font-size:16px;
-      min-height:72px;
+      padding:14px;
+      font-size:15px;
+      min-height:70px;
       display:flex;
       align-items:center;
       justify-content:center;
@@ -71,41 +73,36 @@
     .small{
       font-size:13px;
       color:#6b7780;
-      margin-top:12px;
+      margin-top:10px;
+      text-align:center;
     }
 
-    /* Right panel */
-    .right{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:14px;
-    }
-
+    /* BREATH AREA */
     .breath{
-      width:220px;
-      height:220px;
+      width:180px;
+      height:180px;
       border-radius:50%;
+      margin:0 auto;
       display:grid;
       place-items:center;
-      position:relative;
       background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.6), transparent 25%),
                   linear-gradient(135deg, rgba(255,107,154,0.12), rgba(255,200,220,0.06));
-      box-shadow: 0 8px 30px rgba(40,50,60,0.06);
-      overflow:visible;
+      box-shadow: 0 6px 20px rgba(40,50,60,0.05);
+      position:relative;
     }
 
     .breath .inner{
-      width:110px;
-      height:110px;
+      width:90px;
+      height:90px;
       border-radius:50%;
       background:linear-gradient(135deg,#fff, #ffeef4);
       display:grid;
       place-items:center;
       font-weight:700;
+      font-size:15px;
       color:var(--accent);
-      transform-origin:center;
       animation: breathe 4s ease-in-out infinite;
+      transform-origin:center;
       box-shadow: 0 6px 20px rgba(200,120,150,0.12);
     }
 
@@ -115,35 +112,27 @@
       100%{transform:scale(1)}
     }
 
+    /* HUG BUTTON */
     .hug-btn{
       background:linear-gradient(90deg,#ff7aa6,#ff5a87);
       border:none;
       color:white;
-      padding:12px 18px;
-      border-radius:12px;
+      padding:14px 20px;
+      border-radius:14px;
       font-size:16px;
       cursor:pointer;
+      width:100%;
       box-shadow: 0 8px 18px rgba(255,90,135,0.18);
-      transition:transform 160ms ease, box-shadow 160ms ease;
+      transition:transform 160ms ease;
     }
-    .hug-btn:active{transform:translateY(2px)}
-    .hug-btn:focus{outline:3px solid rgba(255,107,154,0.16)}
+    .hug-btn:active{transform:scale(0.96)}
+    .hug-btn:focus{outline:3px solid rgba(255,107,154,0.2)}
 
-    .tip{
-      background:rgba(255,255,255,0.6);
-      padding:10px 12px;
-      border-radius:10px;
-      font-size:14px;
-      text-align:left;
-      box-shadow: 0 4px 12px rgba(40,50,60,0.03);
-    }
-
-    /* little hearts */
     .heart{
       position:absolute;
       left:50%;
       transform:translateX(-50%);
-      bottom:12px;
+      bottom:14px;
       font-size:22px;
       opacity:0;
       animation: floatUp 1.2s ease forwards;
@@ -155,46 +144,40 @@
       100%{opacity:0; transform:translate(-50%,-90px) scale(1.15)}
     }
 
-    /* responsive */
-    @media (max-width:880px){
-      .card{grid-template-columns:1fr; padding:20px;}
-      .right{flex-direction:row; justify-content:space-between;}
-      .breath{width:160px;height:160px}
+    /* SMALLER MOBILE (under 480px) */
+    @media (max-width:480px){
+      .card{padding:18px;border-radius:18px;}
+      h1{font-size:20px;}
+      p.lead{font-size:14px;}
+      .breath{width:150px;height:150px;}
+      .breath .inner{width:80px;height:80px;font-size:14px;}
+      .hug-btn{padding:12px 18px; font-size:15px;}
     }
   </style>
 </head>
+
 <body>
-  <div class="card" role="main" aria-label="A cosy message for you">
-    <div class="left">
-      <h1>Hey Kutty Pau 💛 — take a gentle pause</h1>
-      <p class="lead">You don’t need to be “on” all the time. It’s okay to feel tired. Here are a few gentle reminders to help you slow down and breathe.</p>
+  <div class="card" role="main">
+    <h1>Hey Kutty Pau 💛 — take a gentle pause</h1>
+    <p class="lead">It’s okay to feel tired. Slow down for a moment. I’m right here.</p>
 
-      <div class="messages" id="messages" aria-live="polite">
-        <span id="msgText">You are doing your best — that’s more than enough.</span>
-      </div>
-
-            <div class="small" style="margin-top:14px;">
-        Want me to say something sweet? Press the HUG button.
-      </div>
+    <div class="messages" id="messages">
+      <span id="msgText">You are doing your best — that’s more than enough.</span>
     </div>
 
-    <div class="right">
-      <div class="breath" aria-hidden="true" id="breathArea" title="Breathing circle">
-        <div class="inner" id="innerCircle">Breathe</div>
-        <!-- hearts will be injected here -->
-      </div>
-
-      <div style="display:flex;flex-direction:column;gap:10px;min-width:200px;align-items:stretch;">
-        <button class="hug-btn" id="hugBtn" aria-pressed="false">🤗 Send HUG</button>
-      </div>
+    <div class="breath" id="breathArea">
+      <div class="inner" id="innerCircle">Breathe</div>
     </div>
+
+    <button class="hug-btn" id="hugBtn">🤗 Send HUG</button>
+    <div class="small">Press it anytime you need something sweet.</div>
   </div>
 
-  <!-- gentle sound (base64 small chime) -->
-  <audio src="/audio.mp3" autoplay></audio>
+  <audio id="chime" autoplay muted playsinline>
+    <source src="/audio.mp3" type="audio/mpeg">
+  </audio>
 
   <script>
-    // Messages to rotate
     const messages = [
       "You are doing your best — that’s more than enough.",
       "It’s okay to rest. Your worth isn’t measured by your productivity.",
@@ -205,20 +188,18 @@
 
     let idx = 0;
     const msgEl = document.getElementById('msgText');
+
     setInterval(()=> {
       idx = (idx + 1) % messages.length;
-      // gentle fade
       msgEl.style.opacity = 0;
       setTimeout(()=> { msgEl.textContent = messages[idx]; msgEl.style.opacity = 1; }, 300);
     }, 5000);
 
-    // Hug button: show hearts, play sound, animate circle
     const hugBtn = document.getElementById('hugBtn');
     const breathArea = document.getElementById('breathArea');
     const inner = document.getElementById('innerCircle');
     const audio = document.getElementById('chime');
 
-    // Helper to create a heart and float it
     function popHeart() {
       const heart = document.createElement('div');
       heart.className = 'heart';
@@ -226,39 +207,29 @@
       heart.style.fontSize = (16 + Math.random()*18) + 'px';
       heart.textContent = '💗';
       breathArea.appendChild(heart);
-      // remove after animation ends
       setTimeout(()=> heart.remove(), 1300);
     }
 
     hugBtn.addEventListener('click', ()=> {
-      // animation: pulse inner quickly
       inner.animate([
         { transform: 'scale(1)' },
         { transform: 'scale(1.35)' },
         { transform: 'scale(1)' }
       ], { duration: 350, easing: 'ease-out' });
 
-      // pop several hearts
-      for (let i=0;i<6;i++){
-        setTimeout(popHeart, i*100);
-      }
+      for (let i=0;i<6;i++){ setTimeout(popHeart, i*100); }
 
-      // try to play sound (may be blocked unless user interacted with page)
-      if (audio && audio.play) {
-        audio.currentTime = 0;
-        audio.play().catch(()=>{/* ignore autoplay block */});
-      }
+      audio.muted = false;
+      audio.currentTime = 0;
+      audio.play().catch(()=>{});
 
-      // small friendly message update
       const old = msgEl.textContent;
-      msgEl.textContent = "Sending you a warm hug — breathe with me for a moment.";
+      msgEl.textContent = "Sending you a warm hug — breathe with me ❤️";
       setTimeout(()=> msgEl.textContent = old, 4000);
     });
 
-    // make the breathing animation slower/faster depending on visibility
     let breatheAnim = null;
     function startBreatheAnim(){
-      // already handled by CSS keyframes; but we can change inner text cycle
       let show = true;
       breatheAnim = setInterval(()=> {
         inner.textContent = show ? 'Breathe in' : 'Breathe out';
@@ -271,21 +242,11 @@
       inner.textContent = 'Breathe';
     }
 
-    // start when page is focused
     startBreatheAnim();
     document.addEventListener('visibilitychange', ()=>{
-      if (document.hidden) stopBreatheAnim(); else startBreatheAnim();
+      if (document.hidden) stopBreatheAnim();
+      else startBreatheAnim();
     });
-
-    // Accessibility: allow keyboard Enter/Space to trigger hug button
-    hugBtn.addEventListener('keydown', (e)=>{
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); hugBtn.click(); }
-    });
-
-    // Tiny graceful fallback: if audio src is the placeholder, mute it (so no console errors)
-    if (!audio.querySelector('source').src.includes('data:audio')) {
-      audio.remove();
-    }
   </script>
 </body>
 </html>
